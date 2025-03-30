@@ -84,3 +84,41 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize app
   fetchActivities();
 });
+
+function renderActivityCard(activity) {
+  const card = document.createElement('div');
+  card.classList.add('activity-card');
+
+  card.innerHTML = `
+    <h4>${activity.name}</h4>
+    <p>${activity.description}</p>
+    <div class="participants">
+      <h5>Participants:</h5>
+      <ul>
+        ${activity.participants.map(participant => `<li>${participant}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  return card;
+}
+
+// Example usage
+const activities = [
+  {
+    name: 'Basketball',
+    description: 'Join the basketball team and improve your skills!',
+    participants: ['john.doe@example.com', 'jane.smith@example.com']
+  },
+  {
+    name: 'Chess Club',
+    description: 'Sharpen your mind with strategic chess games.',
+    participants: ['alice.wonderland@example.com']
+  }
+];
+
+const activitiesList = document.getElementById('activities-list');
+activities.forEach(activity => {
+  const card = renderActivityCard(activity);
+  activitiesList.appendChild(card);
+});
